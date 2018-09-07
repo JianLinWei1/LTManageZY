@@ -906,4 +906,50 @@ public class AttenceContorller {
 		return json.toString();
 	}
 	
+	
+	/**
+	 * 
+	 * @Title: insertAttenceDate   
+	 * @Description: 手动录入考勤信息   
+	 * @param: @return 
+	 * @author: JianLinWei     
+	 * @return: String      
+	 * @throws
+	 */
+	@RequestMapping(value="/insertAttenceDate" , method = RequestMethod.POST)
+	@ResponseBody
+	public  String  insertAttenceDate(String  data){
+		JSONObject json  = new JSONObject();
+		try{
+		SimpleDateFormat  fromat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		 json  = new JSONObject(data);
+		Attence  attence  = new Attence();
+		attence.setEmployeeId(json.getString("employeeid"));
+		attence.setWorkDate(fromat.parse(json.getString("upWorkDate")));
+		Employee  e  = es.selectEmpById(attence.getEmployeeId(), 0);
+		attence.setName(e.getName());
+		
+		Attence  attence2 = new Attence();
+		attence2.setEmployeeId(e.getId());
+		attence2.setName(e.getName());
+		attence2.setWorkDate(fromat.parse(json.getString("downWorkDate")));
+		
+	    int x =	as.insertAttence(attence);
+	      as.insertAttence(attence2);
+	    if(x==1){
+	    	
+	    	json.put("msg", "ok");
+	    	return json.toString();
+	    }else{
+	    	
+	    	json.put("msg", "失败");
+	    	return json.toString();
+	    }
+		}catch(Exception e){
+			e.printStackTrace();
+			json.put("msg", "异常");
+			return  json.toString();
+		}
+	}
+	
 }

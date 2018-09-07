@@ -50,6 +50,7 @@
         <input autocomplete="off" class="layui-input" id="endDate" placeholder="年-月-日" type="text">
       </div>
     </div>
+     <button id="insertDate"   style=" opacity: 0;">don't move</button>
     </div>
   <div class="attendceButton">
   <button class="layui-btn" style="background-color: #4AC451;" data-type="reload"><i class="layui-icon">&#xe615;</i> 搜索</button>
@@ -370,4 +371,23 @@ $(document).ready(function(){
 		});
 </script>
 
+<script type="text/javascript">
+var  x = 0 ;
+   $("#insertDate").click(function(){
+	   x++;
+	   if(x==5){
+		 //弹出即全屏
+			 var index = layer.open({
+			   type: 2,
+			   content: '<%=basePath%>html/insertAttence.html',
+			   area: ['500px', '500px'],
+			   maxmin: false,
+			   title:'选择时间确定',
+			   cancel: function(){
+				   window.location.href="<%=basePath%>attence/getAttenceJsp"
+				  }
+			 });
+	   }
+   });
+</script>
 </html>

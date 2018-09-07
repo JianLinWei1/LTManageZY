@@ -107,11 +107,8 @@ public class AttenceImpl implements AttenceService {
 			    a.setUpWorkPhoto_byte(ad.getAttenceBydate(a.getUpWorkDate(), a.getEmployeeId()).getCamreaPhoto());
 			    a.setDownWorkPhoto_byte(ad.getAttenceBydate(a.getDownWorkDate(), a.getEmployeeId()).getCamreaPhoto());
 			} catch (Exception e) {
-				a.setUpWorkDate("无记录");
-				a.setDownWorkDate("无记录");
-				a.setState("无记录");
-				a.setDepartmentName("无记录");
-				
+				/*a.setUpWorkDate("无记录");
+				a.setDownWorkDate("无记录");*/
 			}
 			la.add(a);
 		}
@@ -319,17 +316,22 @@ public class AttenceImpl implements AttenceService {
 				long attencetime = format.parse(format.format(format1.parse(upWorkDate))).getTime();
 				
 				long attencetime_1 = format.parse(format.format(format1.parse(downWorkDate))).getTime();
-				if( attencetime >= v1.getVersion() && attencetime <= v2.getVersion() && worktime >=v3.getVersion()){
+				/*if( attencetime >= v1.getVersion() && attencetime <= v2.getVersion() && worktime >=v3.getVersion()){
 					i++;
-				}
+				}*/
+				i++;
 				if(attencetime > v2.getVersion()){
-					j += (attencetime - v2.getVersion())/(60*1000);
-					h ++ ;
+					/*j += (attencetime - v2.getVersion())/(60*1000);*/
+					j= 0;
+				/*	h ++ ;*/
+					h = 0;
 				}
 				
 				if(worktime<v3.getVersion()){
-					c++;
-					z += (v3.getVersion()-worktime)*60;
+					/*c++;*/
+					/*z += (v3.getVersion()-worktime)*60;*/
+					z = 0;
+					c = 0;
 				}
 				
 				if(worktime > v3.getVersion() && attencetime_1 >= v4.getVersion()){
@@ -348,10 +350,12 @@ public class AttenceImpl implements AttenceService {
 				if(format2.parse(firstDay).getTime() <= format2.parse(lastDay).getTime() &&
 						cal.get(Calendar.DAY_OF_WEEK)!=Calendar.SATURDAY && 
 						cal.get(Calendar.DAY_OF_WEEK)!=Calendar.SUNDAY  ){
-				d++;
+				/*d++;*/
+					d = 0;
 				}
 				if(vacationdays2.size() >0  && vacationdays2.contains(firstDay)){
 					d++;
+					d = 0;
 				}
 			}
 			firstDay = beforAndAfterDayUtils.getSpecifiedDayAfter(firstDay);
