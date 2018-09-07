@@ -259,6 +259,7 @@ public class ExcelUtil {
 	                        value="--";
 	                        cell.setCellValue(value);
 	                    }else if(rtn instanceof byte[]){
+	                    	
 	                    	row.setHeightInPoints(50);
 	                    	setPic(sheet ,cell,(byte[])rtn,workbook);
 	                    }else {
